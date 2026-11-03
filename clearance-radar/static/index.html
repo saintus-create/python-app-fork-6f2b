@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clearance Radar — nearby liquidation finder</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo">📡</span>
+      <div>
+        <h1>Clearance Radar</h1>
+        <p class="tagline">Find stores near you &amp; the products being liquidated off their shelves</p>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="locate-btn" title="Use my current location">📍 Use my location</button>
+      <label>lat <input id="lat-input" type="number" step="0.0001" /></label>
+      <label>lon <input id="lon-input" type="number" step="0.0001" /></label>
+      <label class="radius">radius <input id="radius-input" type="range" min="1" max="50" step="1" value="25" />
+        <span id="radius-label">25 km</span></label>
+      <button id="scan-btn" class="primary">Scan</button>
+    </div>
+  </header>
+
+  <section id="status-bar" class="status">Locating…</section>
+
+  <section id="alerts-panel" class="alerts hidden">
+    <h2>🚨 Liquidation alerts near you <span id="alerts-count"></span></h2>
+    <div id="alerts-list" class="alerts-list"></div>
+  </section>
+
+  <section class="filters" id="filters">
+    <span class="filters-label">Signals:</span>
+    <div id="filter-chips"></div>
+  </section>
+
+  <main id="stores" class="stores"></main>
+
+  <template id="store-card-tpl">
+    <article class="store-card">
+      <header class="store-head">
+        <div>
+          <h2 class="store-name"></h2>
+          <p class="store-meta"></p>
+        </div>
+        <div class="store-stats">
+          <span class="distance"></span>
+          <span class="flagged"></span>
+        </div>
+      </header>
+      <div class="signal-chips"></div>
+      <div class="items"></div>
+    </article>
+  </template>
+
+  <template id="item-row-tpl">
+    <div class="item-row">
+      <div class="item-main">
+        <div class="item-title"></div>
+        <div class="item-sub"></div>
+        <div class="badges"></div>
+      </div>
+      <div class="item-side">
+        <div class="price-block"></div>
+        <div class="score-block"><div class="score-bar"><div class="score-fill"></div></div><span class="score-num"></span></div>
+        <canvas class="spark" width="180" height="56"></canvas>
+        <div class="prediction"></div>
+      </div>
+    </div>
+  </template>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
